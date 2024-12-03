@@ -18,6 +18,15 @@ struct Index {
   build() {
     Row() {
       Column() {
+        Image($r('app.media.info_icon'))
+          .width(30)
+          .alignSelf(ItemAlign.End)
+          .margin({
+            right: 20
+          })
+          .onClick(()=>{
+            //todo: add a pop up window
+          })
         Column() {
           TextInput({ text: this.text, placeholder: 'input your number...', controller: this.controller })
             .placeholderColor(Color.Grey)
