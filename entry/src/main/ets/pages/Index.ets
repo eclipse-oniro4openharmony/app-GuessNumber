@@ -20,7 +20,15 @@ struct Index {
   }
 
   build() {
-    Row() {
+    Column() {
+      Column() {
+        Text('Guess a number')
+          .fontSize(25)
+          .fontWeight(FontWeight.Bolder)
+      }.margin({
+        bottom: 40
+      })
+
       Column() {
         Image($r('app.media.info_icon'))
           .width(30)
@@ -123,6 +131,7 @@ struct Index {
       }
       .width('100%')
     }
+    .justifyContent(FlexAlign.Center)
     .height('100%')
   }
 }
