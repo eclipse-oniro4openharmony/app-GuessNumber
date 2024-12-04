@@ -1,5 +1,6 @@
 import { randomNumberGenerator } from '../utils/numberUtils'
 import promptAction from '@ohos.promptAction'
+import { infoComponent } from '../component/infoComponent'
 
 @Entry
 @Component
@@ -10,6 +11,9 @@ struct Index {
   @State answer: number = 0
   @State answerText: string = ''
   @State isWin: boolean = false
+  infoController: CustomDialogController = new CustomDialogController({
+    builder: infoComponent()
+  })
 
   aboutToAppear(): void {
     this.answer = randomNumberGenerator()
@@ -24,8 +28,8 @@ struct Index {
           .margin({
             right: 20
           })
-          .onClick(()=>{
-            //todo: add a pop up window
+          .onClick(() => {
+            this.infoController.open()
           })
         Column() {
           TextInput({ text: this.text, placeholder: 'input your number...', controller: this.controller })
@@ -39,6 +43,11 @@ struct Index {
             .fontColor(Color.Black)
             .type(InputType.Number)
             .onChange((value: string) => {
+              if (value.length > 2) {
+                promptAction.showToast({
+                  message: 'Please enter number in range 0-100!'
+                })
+              }
               this.text = value
             })
             .inputStyle()
@@ -50,6 +59,11 @@ struct Index {
                 if (this.text == '') {
                   promptAction.showToast({
                     message: 'Please enter number from 0 to 100'
+                  })
+                }
+                else if (this.text.length > 2) {
+                  promptAction.showToast({
+                    message: 'Invalid number!'
                   })
                 }
                 else {
@@ -85,7 +99,6 @@ struct Index {
               )
           }
 
-          // Text(`Guess number: ${this.guessTime}`)
           if (this.guessTime != 0) {
             if (this.isWin == false) {
               Text(`tried ${this.guessTime} ${this.guessTime == 1 ? `time` : `times`}, your number is ${this.answerText}`)
