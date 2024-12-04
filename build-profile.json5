@@ -1,6 +1,19 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "certpath": "C:/Users/c84381641/.ohos/config/openharmony/default_GuessNumber_B_Qn8V44HXwj1kWhXEL-umMcc38FMloFMKDBR34bgHY=.cer",
+          "storePassword": "0000001BB99CAAF78A02482768042F74FC27CE26C360282120D17048B0A5A5AC5A569A5138A816CFDA52FF",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B40F99276F50ED0FD81057333E98D5978E93A5307E70CA46D064C35F23BF20BCB436C0CD13B2745",
+          "profile": "C:/Users/c84381641/.ohos/config/openharmony/default_GuessNumber_B_Qn8V44HXwj1kWhXEL-umMcc38FMloFMKDBR34bgHY=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:/Users/c84381641/.ohos/config/openharmony/default_GuessNumber_B_Qn8V44HXwj1kWhXEL-umMcc38FMloFMKDBR34bgHY=.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
