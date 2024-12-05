@@ -1,6 +1,7 @@
 import { randomNumberGenerator } from '../utils/numberUtils'
 import promptAction from '@ohos.promptAction'
 import { infoComponent } from '../component/infoComponent'
+import { KeyCode } from '@ohos.multimodalInput.keyCode';
 
 @Entry
 @Component
@@ -35,6 +36,38 @@ struct Index {
     this.guessTime = 0
     this.answer = randomNumberGenerator()
     this.isWin = false
+  }
+
+  submitNumber() {
+    if (this.text == '') {
+      promptAction.showToast({
+        message: 'Please enter number from 0 to 100'
+      })
+    }
+    else if (this.text.length > 2) {
+      promptAction.showToast({
+        message: 'Invalid number!'
+      })
+    }
+    else {
+      const res = parseInt(this.text)
+      if (res > this.answer) {
+        this.answerText = 'big'
+        this.guessTime++
+      }
+      else if (res < this.answer) {
+        this.answerText = 'small'
+        this.guessTime++
+      }
+      else {
+        // Find the correct answer
+        this.guessTime++
+        this.isWin = true
+        this.text = ''
+        this.successController.open()
+        this.isRestart = true
+      }
+    }
   }
 
   build() {
@@ -78,42 +111,18 @@ struct Index {
             })
             .inputStyle()
             .borderWidth(1)
+            .onKeyEvent((event?: KeyEvent) => {
+              if (event) {
+                if (event.keyCode == KeyCode.KEYCODE_ENTER) {
+                  this.submitNumber()
+                }
+              }
+            })
 
           Row({ space: 20 }) {
             Button('Guess')
               .onClick(() => {
-                // if (this.isWin == true) {
-                //   this.resetNumber()
-                // }
-                if (this.text == '') {
-                  promptAction.showToast({
-                    message: 'Please enter number from 0 to 100'
-                  })
-                }
-                else if (this.text.length > 2) {
-                  promptAction.showToast({
-                    message: 'Invalid number!'
-                  })
-                }
-                else {
-                  const res = parseInt(this.text)
-                  if (res > this.answer) {
-                    this.answerText = 'big'
-                    this.guessTime++
-                  }
-                  else if (res < this.answer) {
-                    this.answerText = 'small'
-                    this.guessTime++
-                  }
-                  else {
-                    // Find the correct answer
-                    this.guessTime++
-                    this.isWin = true
-                    this.text = ''
-                    this.successController.open()
-                    this.isRestart = true
-                  }
-                }
+                this.submitNumber()
               })
               .buttonlStyle(
                 Color.Green,
@@ -141,7 +150,7 @@ struct Index {
       }
       .width('100%')
     }
-    .justifyContent(FlexAlign.Center)
+    .justifyContent(FlexAlign.Start)
     .height('100%')
   }
 }
