@@ -11,12 +11,30 @@ struct Index {
   @State answer: number = 0
   @State answerText: string = ''
   @State isWin: boolean = false
+  @State isRestart: boolean = false
   infoController: CustomDialogController = new CustomDialogController({
-    builder: infoComponent()
+    builder: infoComponent(),
+  })
+  successController: CustomDialogController = new CustomDialogController({
+
+    builder: successComponent({
+      guessTime: this.guessTime,
+      isWin: this.isWin,
+      text: this.text,
+      answer: this.answer,
+    }),
+    alignment: DialogAlignment.Center,
   })
 
   aboutToAppear(): void {
     this.answer = randomNumberGenerator()
+  }
+
+  resetNumber(): void {
+    this.text = ''
+    this.guessTime = 0
+    this.answer = randomNumberGenerator()
+    this.isWin = false
   }
 
   build() {
@@ -64,6 +82,9 @@ struct Index {
           Row({ space: 20 }) {
             Button('Guess')
               .onClick(() => {
+                // if (this.isWin == true) {
+                //   this.resetNumber()
+                // }
                 if (this.text == '') {
                   promptAction.showToast({
                     message: 'Please enter number from 0 to 100'
@@ -78,15 +99,20 @@ struct Index {
                   const res = parseInt(this.text)
                   if (res > this.answer) {
                     this.answerText = 'big'
+                    this.guessTime++
                   }
                   else if (res < this.answer) {
                     this.answerText = 'small'
+                    this.guessTime++
                   }
                   else {
+                    // Find the correct answer
+                    this.guessTime++
                     this.isWin = true
+                    this.text = ''
+                    this.successController.open()
+                    this.isRestart = true
                   }
-                  this.guessTime++
-                  this.text = ''
                 }
               })
               .buttonlStyle(
@@ -96,10 +122,7 @@ struct Index {
 
             Button('Reset')
               .onClick(() => {
-                this.text = ''
-                this.guessTime = 0
-                this.answer = randomNumberGenerator()
-                this.isWin = false
+                this.resetNumber()
               })
               .buttonlStyle(
                 Color.Black,
@@ -111,20 +134,7 @@ struct Index {
             if (this.isWin == false) {
               Text(`tried ${this.guessTime} ${this.guessTime == 1 ? `time` : `times`}, your number is ${this.answerText}`)
             }
-            else {
-              if (this.guessTime == 1) {
-                Text(`Correct! You are lucky, try to buy a lottery ticket today.`)
-              }
-              else if (this.guessTime < 5) {
-                Text(`You are extremely smart, only use ${this.answerText} times! `)
-              }
-              else if (this.guessTime < 10 && this.guessTime > 5) {
-                Text(`Your intelligence luck is above average, used ${this.guessTime} times to get the answer!`)
-              }
-              else {
-                Text(`Your IQ and luck need to be recharged. It took you ${this.guessTime} times to answer it!`)
-              }
-            }
+
           }
           // Text(`Random number: ${this.answer}`)
         }
@@ -157,3 +167,49 @@ function inputStyle() {
   .backgroundColor(Color.Transparent)
   .fontSize(14)
 }
+
+@CustomDialog
+struct successComponent {
+  @Link guessTime: number;
+  @Link isWin: boolean;
+  @Link text: string;
+  @Link answer: number;
+  controller: CustomDialogController = new CustomDialogController({
+    builder: successComponent({
+      guessTime: this.guessTime,
+      isWin: this.isWin,
+      text: this.text,
+      answer: this.answer,
+    })
+  })
+
+  aboutToDisappear(): void {
+    if (this.isWin == true) {
+      this.text = ''
+      this.guessTime = 0
+      this.answer = randomNumberGenerator()
+      this.isWin = false
+    }
+  }
+
+  build() {
+    Column() {
+      // Text(`you win with ${this.guessTime} times`)
+      if (this.guessTime == 1) {
+        Text(`Correct! You are lucky, try to buy a lottery ticket today.`)
+      }
+      else if (this.guessTime < 5) {
+        Text(`You are extremely smart, only use ${this.guessTime} times! `)
+      }
+      else if (this.guessTime < 10 && this.guessTime > 5) {
+        Text(`Your intelligence luck is above average, used ${this.guessTime} times to get the answer!`)
+      }
+      else {
+        Text(`Your IQ and luck need to be recharged. It took you ${this.guessTime} times to answer it!`)
+      }
+    }
+    .height('30%')
+    .justifyContent(FlexAlign.Center)
+  }
+}
+
