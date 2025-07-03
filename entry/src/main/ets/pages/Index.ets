@@ -1,7 +1,6 @@
 import { randomNumberGenerator } from '../utils/numberUtils'
-import promptAction from '@ohos.promptAction'
 import { infoComponent } from '../component/infoComponent'
-import { KeyCode } from '@ohos.multimodalInput.keyCode';
+import { KeyCode } from '@kit.InputKit'
 
 @Entry
 @Component
@@ -40,26 +39,22 @@ struct Index {
 
   submitNumber() {
     if (this.text == '') {
-      promptAction.showToast({
+      this.getUIContext().getPromptAction().showToast({
         message: 'Please enter number from 0 to 100'
       })
-    }
-    else if (this.text.length > 2) {
-      promptAction.showToast({
+    } else if (this.text.length > 2) {
+      this.getUIContext().getPromptAction().showToast({
         message: 'Invalid number!'
       })
-    }
-    else {
+    } else {
       const res = parseInt(this.text)
       if (res > this.answer) {
         this.answerText = 'big'
         this.guessTime++
-      }
-      else if (res < this.answer) {
+      } else if (res < this.answer) {
         this.answerText = 'small'
         this.guessTime++
-      }
-      else {
+      } else {
         // Find the correct answer
         this.guessTime++
         this.isWin = true
@@ -103,7 +98,7 @@ struct Index {
             .type(InputType.Number)
             .onChange((value: string) => {
               if (value.length > 2) {
-                promptAction.showToast({
+                this.getUIContext().getPromptAction().showToast({
                   message: 'Please enter number in range 0-100!'
                 })
               }
@@ -141,7 +136,8 @@ struct Index {
 
           if (this.guessTime != 0) {
             if (this.isWin == false) {
-              Text(`tried ${this.guessTime} ${this.guessTime == 1 ? `time` : `times`}, your number is ${this.answerText}`)
+              Text(`tried ${this.guessTime} ${this.guessTime == 1 ? `time` :
+                `times`}, your number is ${this.answerText}`)
             }
 
           }
@@ -206,14 +202,11 @@ struct successComponent {
       // Text(`you win with ${this.guessTime} times`)
       if (this.guessTime == 1) {
         Text(`Correct! You are lucky, try to buy a lottery ticket today.`)
-      }
-      else if (this.guessTime < 5) {
+      } else if (this.guessTime < 5) {
         Text(`You are extremely smart, only use ${this.guessTime} times! `)
-      }
-      else if (this.guessTime < 10 && this.guessTime > 5) {
+      } else if (this.guessTime < 10 && this.guessTime > 5) {
         Text(`Your intelligence luck is above average, used ${this.guessTime} times to get the answer!`)
-      }
-      else {
+      } else {
         Text(`Your IQ and luck need to be recharged. It took you ${this.guessTime} times to answer it!`)
       }
     }
