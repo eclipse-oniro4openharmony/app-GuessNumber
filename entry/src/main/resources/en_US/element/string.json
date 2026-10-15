@@ -15,6 +15,25 @@
     {
       "name": "guess_number",
       "value": "Guess Number"
-    }
+    },
+    { "name": "game_title", "value": "Guess a number" },
+    { "name": "guess_placeholder", "value": "Enter a number from 1 to 100" },
+    { "name": "invalid_guess", "value": "Enter a whole number from 1 to 100." },
+    { "name": "guess_button", "value": "Guess" },
+    { "name": "reset_button", "value": "Reset" },
+    { "name": "guess_high", "value": "Attempt %d: too high." },
+    { "name": "guess_low", "value": "Attempt %d: too low." },
+    { "name": "win_first", "value": "Correct on your first try!" },
+    { "name": "win_quick", "value": "Correct in %d tries! Excellent work." },
+    { "name": "win_good", "value": "Correct in %d tries! Well done." },
+    { "name": "win_more", "value": "Correct in %d tries!" },
+    { "name": "rules_title", "value": "RULES" },
+    { "name": "rules_intro", "value": "The game chooses a number from 1 to 100. Keep guessing until you find it." },
+    { "name": "rules_step_1", "value": "1. Enter a whole number from 1 to 100." },
+    { "name": "rules_step_2", "value": "2. Tap Guess to submit it." },
+    { "name": "rules_step_3", "value": "3. Use the higher or lower hint to try again." },
+    { "name": "rules_step_4", "value": "4. Find the number to see how many tries it took." },
+    { "name": "rules_reset", "value": "Tap Reset to start a new game." },
+    { "name": "close_button", "value": "Close" }
   ]
 }

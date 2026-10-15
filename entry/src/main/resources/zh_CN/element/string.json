@@ -15,6 +15,25 @@
     {
       "name": "guess_number",
       "value": "猜数字"
-    }
+    },
+    { "name": "game_title", "value": "猜数字" },
+    { "name": "guess_placeholder", "value": "输入 1 到 100 之间的数字" },
+    { "name": "invalid_guess", "value": "请输入 1 到 100 之间的整数。" },
+    { "name": "guess_button", "value": "猜一猜" },
+    { "name": "reset_button", "value": "重置" },
+    { "name": "guess_high", "value": "第 %d 次：猜大了。" },
+    { "name": "guess_low", "value": "第 %d 次：猜小了。" },
+    { "name": "win_first", "value": "第一次就猜对了！" },
+    { "name": "win_quick", "value": "猜对了！只用了 %d 次，太棒了。" },
+    { "name": "win_good", "value": "猜对了！用了 %d 次，做得好。" },
+    { "name": "win_more", "value": "猜对了！一共用了 %d 次。" },
+    { "name": "rules_title", "value": "游戏规则" },
+    { "name": "rules_intro", "value": "系统会随机选出 1 到 100 之间的数字。不断猜测，直到找到它。" },
+    { "name": "rules_step_1", "value": "1. 输入 1 到 100 之间的整数。" },
+    { "name": "rules_step_2", "value": "2. 点击“猜一猜”提交。" },
+    { "name": "rules_step_3", "value": "3. 根据猜大或猜小的提示继续尝试。" },
+    { "name": "rules_step_4", "value": "4. 猜对后查看使用的次数。" },
+    { "name": "rules_reset", "value": "点击“重置”开始新游戏。" },
+    { "name": "close_button", "value": "关闭" }
   ]
 }
