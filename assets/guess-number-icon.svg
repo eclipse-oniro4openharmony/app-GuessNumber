@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Guess Number app icon</title>
+  <rect width="512" height="512" rx="112" fill="#6024B5"/>
+  <circle cx="406" cy="102" r="38" fill="#FF27B7"/>
+  <circle cx="106" cy="408" r="38" fill="#00C9E5"/>
+  <rect x="106" y="106" width="300" height="300" rx="66" fill="#F8F3FF"/>
+  <text x="256" y="353" fill="#6024B5" font-family="DejaVu Sans, sans-serif" font-size="274" font-weight="700" text-anchor="middle">?</text>
+</svg>
